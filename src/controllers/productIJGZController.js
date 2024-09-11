@@ -27,8 +27,8 @@ exports.getProductById = async (req, res) => {
 exports.createProduct = async(req, res) => {
     try{
         const newProduct = new ProductIJGZ(req.body);
-        const SaveProduct = await newProduct.Save();
-        res.status(201).json(savedProduct);
+        const saveProduct = await newProduct.save();
+        res.status(201).json(saveProduct);
     }   catch (error){
         res.status(500).json({ error: 'Error al crear producto' });
     }
@@ -52,12 +52,12 @@ exports.updateProduct = async (req, res) => {
 //eliminar producto
 exports.deleteProduct = async (req, res) => {
     try{
-        const deleteProduct = await ProductIJGZ.findByIdAndRemove(req.params.id);
-        if(!deleteProduct){
+        const deletedProduct = await ProductIJGZ.findByIdAndRemove(req.params.id);
+        if(!deletedProduct){
             return res.status(404).json({ error: 'Producto no encontrado' });
         }
         res.json({ message: 'Producto eliminado correctamente' });
-    } catch (error) {
+    } catch (error) {  
         res.status(500).json({ error: 'Error al eliminar producto' });
     }
 };
