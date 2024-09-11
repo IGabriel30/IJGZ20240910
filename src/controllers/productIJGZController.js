@@ -50,14 +50,14 @@ exports.updateProduct = async (req, res) => {
 };
 
 //eliminar producto
-exports.deleteProduct = async (req, res) => {
-    try{
-        const deletedProduct = await ProductIJGZ.findByIdAndRemove(req.params.id);
-        if(!deletedProduct){
+exports.deleteProduct = async(req, res) => {
+    try {
+        const product = await ProductIJGZ.findByIdAndDelete(req.params.id);
+        if (!product) {
             return res.status(404).json({ error: 'Producto no encontrado' });
         }
         res.json({ message: 'Producto eliminado correctamente' });
-    } catch (error) {  
+    } catch (error) {
         res.status(500).json({ error: 'Error al eliminar producto' });
     }
 };
