@@ -1,17 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const productRoutes = require('./src/routes/productIJGZRoute');
-const database = require('./src/config/database');
+const mongoose = require('./src/config/database');  // Aquí cargas la conexión a la BD
+require('dotenv').config();  // Cargar variables de entorno
 
 const app = express();
-const PORT = 3000;
 
-//Middleware para analizar el cuerpo de las solicitudes en formato JSON
+// Puerto de la variable de entorno o 3000 como predeterminado
+const PORT = process.env.PORT || 3000;
+
+// Middleware para analizar JSON
 app.use(bodyParser.json());
 
-//rutas de la API
+// Rutas de la API
 app.use('/products', productRoutes);
 
-app.listen(PORT,() =>{
-    console.log('Servidor escuchando en el puerto ${PORT}');
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
